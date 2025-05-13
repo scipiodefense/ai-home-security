@@ -1,4 +1,4 @@
-:import streamlit as st
+import streamlit as st
 from datetime import datetime
 
 # Set up the layout
@@ -19,4 +19,8 @@ uploaded_file = st.file_uploader("Choose a video", type=["mp4", "avi", "mov"])
 if uploaded_file:
     st.success("Video uploaded!")
     st.video(uploaded_file)
+
+# Footer
+st.markdown("---")
+st.caption("Developed by Dr. Oscar Neyra • Powered by Streamlit")
 
