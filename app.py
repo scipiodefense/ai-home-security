@@ -1,25 +1,32 @@
 import streamlit as st
-from fall_detector import detect_fall
-from twilio_alert import send_call
-import tempfile
+from datetime import datetime
 
-st.set_page_config(page_title="AI Security Dashboard")
+# Set up the layout
+st.set_page_config(page_title="Home Security AI", layout="wide")
 
-# 🔐 Password protection
+# Password protection
 password = st.text_input("Enter password:", type="password")
-if password != "your_secret_password":
+if password != "supersecret":
     st.stop()
 
-st.title("AI Residential Security Platform")
-uploaded_file = st.file_uploader("Upload a video", type=["mp4", "avi", "mov"])
+# Header
+st.markdown("<h1 style='text-align: center;'>🏠 AI Home Security Dashboard</h1>", unsafe_allow_html=True)
+st.markdown("#### Welcome to your smart surveillance dashboard.")
 
+# Upload section
+st.markdown("### 🔍 Upload a Home Security Video")
+uploaded_file = st.file_uploader("Choose a video", type=["mp4", "avi", "mov"])
 if uploaded_file:
+    st.success("Video uploaded!")
     st.video(uploaded_file)
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".mp4") as temp_file:
-        temp_file.write(uploaded_file.read())
-        if detect_fall(temp_file.name):
-            st.error("Fall Detected!")
-            send_call()
-        else:
-            st.success("No fall detected.")
+
+# Placeholder for alerts
+st.markdown("---")
+st.markdown("### ⚠️ Detected Events (Coming Soon)")
+with st.expander("🕒 Latest Events"):
+    st.info("No events detected yet. This is where alerts will appear once AI is activated.")
+
+# Footer
+st.markdown("---")
+st.caption("Developed by Dr. Oscar Neyra • Powered by Python + Streamlit")
 
