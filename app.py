@@ -1,5 +1,7 @@
 import streamlit as st
 from datetime import datetime
+import tempfile
+from analyzer import analyze_video  # 👈 External function
 
 # Set up the layout
 st.set_page_config(page_title="Home Security AI", layout="wide")
@@ -16,17 +18,17 @@ st.markdown("#### Welcome to your smart surveillance dashboard.")
 # Upload section
 st.markdown("### 🔍 Upload a Home Security Video")
 uploaded_file = st.file_uploader("Choose a video", type=["mp4", "avi", "mov"])
+
 if uploaded_file:
     st.success("Video uploaded!")
     st.video(uploaded_file)
 
-# Placeholder for alerts
-st.markdown("---")
-st.markdown("### ⚠️ Detected Events (Coming Soon)")
-with st.expander("🕒 Latest Events"):
-    st.info("No events detected yet. This is where alerts will appear once AI is activated.")
+    # Save video to a temp file
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".mp4") as tmp:
+        tmp.write(uploaded_file.read())
+        result = analyze_video(tmp.name)  # 🔍 Call the external function
 
-# Footer
-st.markdown("---")
-st.caption("Developed by Dr. Oscar Neyra • Powered by Python + Streamlit")
+    # Show the result
+    st.markdown("### 🧠 Analysis Result")
+    st.info(result)
 
