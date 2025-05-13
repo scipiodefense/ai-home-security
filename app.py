@@ -1,12 +1,18 @@
 import streamlit as st
 from datetime import datetime
+import os
 
 st.set_page_config(page_title="AI Home Security", layout="wide")
 
-# Load secret password
+# Load password securely
+correct_password = st.secrets.get("APP_PASSWORD", "supersecret")
 password = st.text_input("Enter password:", type="password")
-if password != st.secrets["APP_PASSWORD"]:
+
+if password != correct_password:
     st.stop()
+
+# DO NOT ask for password again anywhere else in your app
+
 
 # Sidebar layout
 st.sidebar.image("https://cdn-icons-png.flaticon.com/512/616/616408.png", width=100)
