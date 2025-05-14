@@ -63,7 +63,8 @@ elif nav == "AI Monitor":
         st.metric("Intruder Risk", "Low", delta="-8%")
 
     st.markdown("#### Pose Snapshot")
-    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Human_skeleton_back_en.svg/1280px-Human_skeleton_back_en.svg.png", use_column_width=True)
+    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/BlankMap-World6.svg/2000px-BlankMap-World6.svg.png", use_column_width=True)
+
 
 # === EMERGENCY PANEL ===
 elif nav == "Emergency Panel":
