@@ -100,4 +100,28 @@ elif nav == "🧠 AI Monitor":
     with col1:
         st.metric("Fall Risk Index", "High", "+23%")
     with col2:
-        st.metric("Intruder Risk I
+        st.metric("Intruder Risk Index", "Low", "-8%")
+
+    st.markdown("### 📸 Pose Detection (Simulated)")
+    st.markdown("> AI has classified posture collapse using frame-based skeleton estimation.")
+
+# === EMERGENCY PANEL ===
+elif nav == "📞 Emergency Ops":
+    st.markdown("## 📞 Emergency Protocol Interface")
+    st.markdown("**Assigned Operator:** Dr. Oscar Neyra\n**Contact Route:** +1 (555) 123-4567")
+
+    if st.button("🚨 Activate Call Protocol"):
+        with st.spinner("Initiating encrypted dial..."):
+            time.sleep(1.5)
+        st.success("✅ Call placed successfully. Response unit acknowledged at 00:19.")
+
+    st.markdown("### Call Engagement Log")
+    st.markdown("""
+- 00:18 — Call auto-initiated  
+- 00:19 — Operator response logged  
+- 00:21 — Emergency cleared
+    """)
+
+# === FOOTER ===
+st.markdown("---")
+st.markdown("<center><small>Scipio AI Intelligence Platform • Confidential • © 2025 Dr. Oscar Neyra</small></center>", unsafe_allow_html=True)
