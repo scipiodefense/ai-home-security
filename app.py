@@ -2,10 +2,10 @@ import streamlit as st
 import time
 import random
 
-# === GLOBAL SETUP ===
-st.set_page_config(page_title="Lisus AI Command | Surveillance Ops", layout="wide")
+# === CONFIG ===
+st.set_page_config(page_title="Scipio AI Command | Surveillance Ops", layout="wide")
 
-# === CUSTOM DARK THEME STYLING ===
+# === CUSTOM STYLING ===
 st.markdown("""
     <style>
         html, body, [class*="css"] {
@@ -30,14 +30,14 @@ password = st.text_input("🛡️ Enter Operator Code:", type="password")
 if password != "supersecret":
     st.stop()
 
-# === SIDEBAR NAVIGATION ===
-st.sidebar.title("🧭 Lisus Ops Nav")
+# === SIDEBAR ===
+st.sidebar.title("🧭 Scipio Ops Nav")
 nav = st.sidebar.radio("Access Panel", ["🛰️ Command View", "🎥 Live Feed", "🧠 AI Monitor", "📞 Emergency Ops"])
 
 # === DASHBOARD (Command View) ===
 if nav == "🛰️ Command View":
-    st.markdown("<h1 style='text-align: center; color:#39ff14;'>🛰️ LISUS AI COMMAND CENTER</h1>", unsafe_allow_html=True)
-    st.caption("Mission Dashboard • AI Surveillance Ops • Powered by Lisus")
+    st.markdown("<h1 style='text-align: center; color:#39ff14;'>🛰️ SCIPIO AI COMMAND CENTER</h1>", unsafe_allow_html=True)
+    st.caption("Mission Dashboard • AI Surveillance Ops • Powered by Scipio")
 
     col1, col2 = st.columns([2, 1])
     with col1:
@@ -100,28 +100,4 @@ elif nav == "🧠 AI Monitor":
     with col1:
         st.metric("Fall Risk Index", "High", "+23%")
     with col2:
-        st.metric("Intruder Risk Index", "Low", "-8%")
-
-    st.markdown("### 🧬 Pose Signature Snapshot")
-    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Human_skeleton_back_en.svg/1280px-Human_skeleton_back_en.svg.png", use_column_width=True)
-
-# === EMERGENCY PANEL ===
-elif nav == "📞 Emergency Ops":
-    st.markdown("## 📞 Emergency Protocol Interface")
-    st.markdown("**Assigned Operator:** Dr. Oscar Neyra\n**Contact Route:** +1 (555) 123-4567")
-
-    if st.button("🚨 Activate Call Protocol"):
-        with st.spinner("Initiating encrypted dial..."):
-            time.sleep(1.5)
-        st.success("✅ Call placed successfully. Response unit acknowledged at 00:19.")
-
-    st.markdown("### Call Engagement Log")
-    st.markdown("""
-- 00:18 — Call auto-initiated  
-- 00:19 — Operator response logged  
-- 00:21 — Emergency cleared
-    """)
-
-# === FOOTER ===
-st.markdown("---")
-st.markdown("<center><small>Scipio AI Intelligence Platform • Confidential • © 2025 Dr. Oscar Neyra</small></center>", unsafe_allow_html=True)
+        st.metric("Intruder Risk I
