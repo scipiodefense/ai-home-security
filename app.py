@@ -2,142 +2,154 @@ import streamlit as st
 import time
 import random
 
-st.set_page_config(page_title="Scipio AI Ops | Real-Time Surveillance", layout="wide")
+st.set_page_config(page_title="Scipio AI | Command Control", layout="wide")
 
-# === DARK MODE CUSTOMIZATION ===
+# === STYLING ===
 st.markdown("""
 <style>
-html, body, [class*="css"] {
-    background-color: #0f1117;
-    color: #e0e0e0;
-    font-family: 'Segoe UI', sans-serif;
+body, html, [class*='css'] {
+    background-color: #0a0c10;
+    color: #e6e6e6;
+    font-family: 'Consolas', monospace;
 }
 .stButton>button {
-    background-color: #ff4b4b;
+    background-color: #ff004c;
     color: white;
-    border-radius: 8px;
-    border: none;
+    border-radius: 5px;
+    padding: 0.5em 1.5em;
+    font-weight: bold;
 }
 .stMetric {
-    color: #39ff14 !important;
+    color: #00ff9d;
+    font-weight: bold;
+}
+hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, #00ff9d, transparent);
+    margin: 2rem 0;
 }
 </style>
 """, unsafe_allow_html=True)
 
 # === AUTH ===
-password = st.text_input("🛡️ Enter Operator Code:", type="password")
+password = st.text_input("🔐 Secure Access Code:", type="password")
 if password != "supersecret":
     st.stop()
 
 # === SIDEBAR ===
-st.sidebar.title("🧭 Scipio Ops Nav")
-nav = st.sidebar.radio("Access Panel", ["🛰️ Command View", "🧠 AI Monitor", "📞 Emergency Ops", "📡 Threat Graphs"])
+st.sidebar.title("🧭 Scipio Ops Navigation")
+nav = st.sidebar.radio("Go to:", [
+    "🛰️ Mission Panel",
+    "🎥 Multicam Grid",
+    "📞 AI Emergency Dispatcher",
+    "🧠 Threat Intelligence",
+    "📂 Incident Timeline"
+])
 
-# === COMMAND CENTER ===
-if nav == "🛰️ Command View":
-    st.markdown("<h1 style='text-align: center; color:#39ff14;'>🛰️ SCIPIO AI COMMAND CENTER</h1>", unsafe_allow_html=True)
-    st.caption("Real-Time Home Surveillance • YC 2025 Demo • AI Secured")
+# === MISSION PANEL ===
+if nav == "🛰️ Mission Panel":
+    st.markdown("<h1 style='text-align: center; color:#00ff9d;'>🛰️ SCIPIO COMMAND OPS</h1>", unsafe_allow_html=True)
+    st.caption("Autonomous Threat Analysis • Real-time AI Control Node")
 
     col1, col2 = st.columns([2, 1])
     with col1:
-        st.markdown("### 🎯 Tactical Feed – Living Room")
+        st.markdown("### 🟢 Primary Camera Feed – Zone A")
         st.video("demo_fall.mp4")
-        st.caption("CAM-005-LR • Encrypted • Status: ✅ Online")
+        st.caption("CAM-005-LR | Status: Online | Secure Feed")
 
     with col2:
-        st.markdown("### 🔐 AI Event Summary")
-        st.metric("⚠️ Fall Detected", "1", "+1")
-        st.metric("🧥 Suspicious Behavior", "0")
-        st.metric("📞 Emergency Calls", "1", "+1")
-        st.metric("👤 People Detected", "12", "+3")
+        st.markdown("### 🧠 AI Alerts Summary")
+        st.metric("👵 Fall Detected", "1", "+1")
+        st.metric("🚨 Emergency Triggered", "1", "+1")
+        st.metric("📡 Model Confidence", "91.3%")
+        st.metric("📞 Contact Reached", "Oscar Neyra")
 
     st.divider()
-    st.markdown("### 🧰 Live Event Log")
-    st.code("""
-[00:00] AI system initialized.
-[00:02] Human presence detected.
-[00:17] ⚠️ Sudden collapse (confidence 91.3%).
-[00:18] 📞 AI Agent initiated emergency dispatch protocol.
-[00:21] ✅ Human response confirmed.
-""")
-
-# === AI MONITOR ===
-elif nav == "🧠 AI Monitor":
-    st.markdown("## 🧠 Neural Intelligence Analysis")
-
-    col1, col2 = st.columns([2, 1])
-    with col1:
-        st.markdown("### 📈 Fall Confidence Stream")
-        data = [random.randint(40, 60) for _ in range(10)] + [86, 91, 93, 88, 85]
-        st.line_chart(data)
-
-    with col2:
-        st.markdown("### 🧬 Risk Indices")
-        st.metric("Fall Risk", "High", "+23%")
-        st.metric("Intrusion Risk", "Low", "-8%")
-
-    st.markdown("### 🕒 Timeline Summary")
-    st.markdown("""
-- 00:02 — Person enters zone  
-- 00:10 — Movement classified  
-- 00:17 — ⚠️ Fall trigger  
-- 00:18 — 📞 Dispatch: Ambulance  
-- 00:20 — Operator acknowledged
-""")
-
-# === EMERGENCY PANEL ===
-elif nav == "📞 Emergency Ops":
-    st.markdown("## 📞 Emergency Dispatch Protocol")
-
-    st.markdown("#### Operator: Dr. Oscar Neyra")
-    selected_agency = st.selectbox("Select Emergency Type", ["🚓 Police", "🚑 Ambulance", "🚒 Firefighters"])
-
-    if st.button("🚨 Activate Emergency AI Agent"):
-        with st.spinner(f"Connecting AI agent to {selected_agency.split()[1]}..."):
-            time.sleep(2)
-        st.success(f"✅ AI call placed to {selected_agency.split()[1]} dispatch center.")
-
-        st.markdown("### 🧠 AI Agent Simulation:")
-        st.markdown(f"""
-        **Scipio AI:** Hello, this is Scipio Autonomous Security Agent.  
-        A critical event has occurred at Dr. Neyra's residence.  
-        Requesting immediate {selected_agency.split()[1]} dispatch to Culver City.  
-        Incident type: {'Fall with possible injury' if selected_agency == '🚑 Ambulance' else 'Unknown threat detected'}.
+    st.markdown("### 🗣️ AI Voice Transcript Log")
+    with st.expander("View AI-Human Dispatch Communication"):
+        st.markdown("""
+        **[00:17]** AI: Fall pattern detected in Zone A.
+        
+        **[00:18]** AI: Dialing emergency contact: +1 (555) 123-4567…
+        
+        **[00:19]** OSCAR: Hello?
+        
+        **[00:19]** AI: This is Scipio Autonomous Agent. Grandma has fallen.
+        
+        **[00:20]** AI: Dispatching Ambulance. ETA 4 mins.
+        
+        **[00:21]** AI: Returning to monitoring mode.
         """)
 
-    st.divider()
-    st.markdown("#### Last Calls")
-    st.markdown("- 00:18 — Call: 🚑 Ambulance dispatched by AI")
-    st.markdown("- 00:21 — Response confirmed by human")
+# === MULTICAM GRID ===
+elif nav == "🎥 Multicam Grid":
+    st.markdown("<h2 style='color:#00ff9d;'>🎥 Multicamera Surveillance Grid</h2>", unsafe_allow_html=True)
+    cam1, cam2 = st.columns(2)
+    cam3, cam4 = st.columns(2)
 
-# === THREAT GRAPH ===
-elif nav == "📡 Threat Graphs":
-    st.markdown("## 📡 AI Surveillance Intelligence")
+    with cam1:
+        st.video("demo_fall.mp4")
+        st.caption("CAM-001 | Zone A – Living Room")
+    with cam2:
+        st.video("demo_fall.mp4")
+        st.caption("CAM-002 | Zone B – Entrance")
+    with cam3:
+        st.video("demo_fall.mp4")
+        st.caption("CAM-003 | Zone C – Backyard")
+    with cam4:
+        st.video("demo_fall.mp4")
+        st.caption("CAM-004 | Zone D – Garage")
 
+# === EMERGENCY DISPATCH ===
+elif nav == "📞 AI Emergency Dispatcher":
+    st.markdown("## 📞 Emergency Dispatch Interface")
+    choice = st.selectbox("Select Emergency Type", ["🚑 Ambulance", "🚓 Police", "🚒 Firefighters"])
+
+    if st.button("🤖 Initiate AI Emergency Call"):
+        with st.spinner("Connecting to dispatch network..."):
+            time.sleep(2)
+        st.success(f"Call to {choice.split()[1]} successfully simulated.")
+        st.markdown(f"""
+        **AI Agent:**
+        Critical incident detected.
+        Type: {choice}
+        Location: Culver City
+        Victim: Elderly female
+        Action: Dispatch requested
+        """)
+
+# === THREAT INTELLIGENCE ===
+elif nav == "🧠 Threat Intelligence":
+    st.markdown("## 📊 Threat Intelligence & Graphs")
     col1, col2 = st.columns(2)
+
     with col1:
-        st.markdown("### 🔄 Threat Type Breakdown")
+        st.markdown("### 🔄 Threat Breakdown")
         threat_data = {
-            "Fall": random.randint(3, 5),
+            "Fall Events": random.randint(1, 3),
             "Loitering": random.randint(0, 2),
             "Masked Entry": random.randint(0, 1),
-            "No Event": random.randint(10, 20)
+            "No Event": random.randint(10, 15)
         }
         st.bar_chart(threat_data)
 
     with col2:
-        st.markdown("### 🔎 Detection Precision by Model")
-        st.markdown("Model V7.3 Confidence Scores")
-        st.line_chart([random.uniform(0.6, 0.8) for _ in range(10)] + [0.89, 0.91, 0.94])
+        st.markdown("### ⚙️ Model Confidence")
+        st.line_chart([random.uniform(0.72, 0.91) for _ in range(12)])
 
-    st.markdown("### 🧭 Zone Monitoring Heatmap (Simulated Readout)")
-    st.markdown("""
-- Zone A (Living Room): 🟥 High Activity  
-- Zone B (Backyard): 🟨 Moderate  
-- Zone C (Garage): 🟩 Clear  
-- Zone D (Entrance): 🟩 Clear
+# === INCIDENT TIMELINE ===
+elif nav == "📂 Incident Timeline":
+    st.markdown("## 📂 AI-Logged Event Timeline")
+    st.markdown("### Case ID: GMA-001 — Fall Detected")
+    st.code("""
+    [00:17] Fall detected — CAM-005
+    [00:18] Dialing: Oscar Neyra
+    [00:19] Confirmed: Grandma fell
+    [00:20] Dispatch: 🚑 Ambulance
+    [00:21] Monitoring resumed
     """)
+    st.button("📥 Download Incident Report")
 
 # === FOOTER ===
-st.markdown("---")
-st.markdown("<center><small>Scipio AI Intelligence Platform • Confidential • Built by Dr. Oscar Neyra</small></center>", unsafe_allow_html=True)
+st.markdown("<hr><center><small>Scipio AI Platform • Command Ops Mode • Built by Dr. Oscar Neyra • YC 2025</small></center>", unsafe_allow_html=True)
